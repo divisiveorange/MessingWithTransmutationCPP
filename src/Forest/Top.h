@@ -11,7 +11,7 @@ namespace Forest {
         Top<T>* getHead() override {
             return this;
         }
-        Top<T>* merge(Top<T>* otherTop, TransNormalTop<T>* constructionLocation) {
+        NonBottom<T>* merge(Top<T>* otherTop, TransNormalTop<T>* constructionLocation) {
             NonTop<T>* nonTopOther = otherTop->toNonTop(constructionLocation->top());
             NonTop<T>* nonTopThis = this->toNonTop(constructionLocation);
             TransNormalTop<T>* newTop = new(constructionLocation) TransNormalTop<T>(nonTopThis, nonTopOther);
