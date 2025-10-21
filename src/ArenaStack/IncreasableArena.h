@@ -14,10 +14,9 @@ namespace ArenaStack {
         IncreasableArena(const IncreasableArena& other) = default;
         IncreasableArena(IncreasableArena&& other) = default;
         IncreasableArena() = default;
-        template<typename... Args>
-        T* push(Args&&... args) {
+        T* pushRaw() {
             if (currentPlace < this->size) {
-                auto returnable = new(&(this->data[currentPlace])) T(std::forward<Args>(args)...);
+                auto returnable = this->data + currentPlace;
                 currentPlace++;
                 return returnable;
             } else if (currentPlace > this->size) {
@@ -29,8 +28,12 @@ namespace ArenaStack {
                 this->transmuteAddNext(std::move(next));
                 this->data = static_cast<T*>(malloc(sizeof(T)*this->size));
                 this->currentPlace = 0;
-                return this->push(std::forward<Args>(args)...);
+                return this->pushRaw();
             }
+        }
+        template<typename... Args>
+        T* push(Args&&... args) {
+            return new(pushRaw()) T(std::forward<Args>(args)...);
         }
         virtual void pop() = 0;
         virtual IncreasableArena& getIncreasable() = 0;

@@ -1,5 +1,5 @@
 #pragma once
-#include "PaddingForTrans.h"
+#include "../GeneralLib/PaddingForTrans.h"
 #include "IncreasableWithNext.h"
 #include "IncreasableAlone.h"
 namespace ArenaStack {

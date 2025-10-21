@@ -1,7 +1,7 @@
 #pragma once
 #include "FullAlone.h"
 #include "FullWithNext.h"
-#include "PaddingForTrans.h"
+#include "../GeneralLib/PaddingForTrans.h"
 #include "TransFullWithNext.h"
 
 namespace ArenaStack {
