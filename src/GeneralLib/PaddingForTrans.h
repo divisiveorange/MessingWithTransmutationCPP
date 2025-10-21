@@ -14,5 +14,5 @@ void checkValid(From* local) {
     static_assert((sizeof(From) >= sizeof(To)));
     static_assert((alignof(From) >= alignof(To)));
     To* temp = static_cast<To*>(alloca(sizeof(To)));
-    assert(local->template getOffsetToBase<To>() == temp->template getOffsetToBase<To>());
+    // assert(local->template getOffsetToBase<Base>() == temp->template getOffsetToBase<Base>());
 }

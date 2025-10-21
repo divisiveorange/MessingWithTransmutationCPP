@@ -4,11 +4,12 @@ namespace Forest {
     template <class T>
     class NonBottom;
     template <class T>
-    class NonTop : Node<T> {
+    class NonTop : virtual public Node<T> {
     protected:
         NonBottom<T>* up;
     public:
-        Top* getHead() override {
+        NonTop(NonBottom<T>* up) : up(up) {}
+        Top<T>* getHead() override {
             return up->getHead();
         }
     };

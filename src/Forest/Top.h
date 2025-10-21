@@ -1,21 +1,23 @@
 #pragma once
 #include "Node.h"
+#include "NormalTop.h"
+
 namespace Forest {
     template <class T>
     class TransNormalTop;
     template <class T>
-    class Top : Node<T> {
+    class Top : virtual public Node<T> {
     public:
-        Top* getHead() override {
-            return *this;
+        Top<T>* getHead() override {
+            return this;
         }
-        Top* merge(Top<T>* otherTop, TransNormalTop<T>* constructionLocation) {
-            TransNormalTop<T>* newTop = new(constructionLocation) TransNormalTop<T>(this, otherTop);
-            otherTop->ToNonTop(newTop);
-            this->ToNonTop(newTop);
-            return newTop;
+        Top<T>* merge(Top<T>* otherTop, TransNormalTop<T>* constructionLocation) {
+            NonTop<T>* nonTopOther = otherTop->toNonTop(constructionLocation->top());
+            NonTop<T>* nonTopThis = this->toNonTop(constructionLocation);
+            TransNormalTop<T>* newTop = new(constructionLocation) TransNormalTop<T>(nonTopThis, nonTopOther);
+            return newTop->top();
         }
     protected:
-        virtual void ToNonTop(Top* newTop) = 0;
+        virtual NonTop<T>* toNonTop(NormalTop<T>* newTop) = 0;
     };
 }

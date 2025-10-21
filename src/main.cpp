@@ -5,6 +5,8 @@
 #include <cassert>
 #include <vector>
 #include <string>
+#include "Forest/TransLonely.h"
+#include "Forest/TransNormalTop.h"
 
 int main() {
     ArenaStack::TransIncreasableAlone<int> var;
@@ -18,5 +20,11 @@ int main() {
     auto intStar3 = multiTypeArena.push<int>(3);
     assert(intStar2 == intStar3);
     auto str = multiTypeArena.push<std::string>("hi");
+    ArenaStack::MultiTypeArena<Forest::TransLonely<int>, Forest::TransNormalTop<int>> forest;
+    Forest::TransLonely<int> town1(1);
+    Forest::TransLonely<int> town2(2);
+    auto town3 = town1->getHead()->merge(town2->getHead(), forest.pushRaw<Forest::TransNormalTop<int>>());
+
+
     return 0;
 }

@@ -12,6 +12,10 @@ namespace ArenaStack {
         T* push(Args... args) {
             return std::get<Stack<T>>(arenas).push(std::forward<Args>(args)...);
         }
+        template<class T>
+        T* pushRaw() {
+            return std::get<Stack<T>>(arenas).pushRaw();
+        }
     private:
         std::tuple<Stack<Ts>...> arenas;
     };
