@@ -12,7 +12,7 @@ namespace ArenaStack {
     public:
         TransFullWithNext(T* data, std::unique_ptr<FullArena<T>>&& next) : FullWithNext<T>(data, std::move(next)) {}
         void transmuteRemoveNext() override {
-            checkValid<FullArena, std::remove_reference_t<decltype(*this)>, TransFullAlone<T>>(this);
+            checkValid<FullArena<T>, std::remove_reference_t<decltype(*this)>, TransFullAlone<T>>(this);
             this->next.release();
             new(this) TransFullAlone<T>(this->data);
         }

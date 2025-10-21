@@ -12,8 +12,8 @@ namespace ArenaStack {
             getArena().pop();
         }
     private:
-        TransIncreasableAlone arenaStorage;
-        IncreasableArena& getArena() {
+        TransIncreasableAlone<T> arenaStorage;
+        IncreasableArena<T>& getArena() {
             return arenaStorage.getIncreasable();
         }
     };
