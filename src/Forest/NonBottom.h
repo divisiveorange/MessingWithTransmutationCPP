@@ -8,13 +8,13 @@ namespace Forest {
         NonTop<T> *left, *right;
         T sumCache;
     public:
-        NonBottom(NonTop<T>* left, NonTop<T>* right) : left(left), right(right) {
+        NonBottom(NonTop<T>* left, NonTop<T>* right) : left(left), right(right), sumCache(left->getSum() + right->getSum()) {
             update();
         }
         virtual void update() {
             sumCache = left->getSum() + right->getSum();
         }
-        const T& getSum() override {
+        const T& getSum() const override {
             return sumCache;
         }
     };

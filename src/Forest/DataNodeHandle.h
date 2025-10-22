@@ -1,13 +1,16 @@
 #pragma once
 #include "NodeHandle.h"
 #include "Bottom.h"
-namespace Forest::NodeHandles {
+#include "Forest.h"
+namespace Forest {
+    template <class T>
+    class Forest;
     template <class T>
     class DataNodeHandle : public NodeHandle<T> {
     protected:
-        friend class Forest;
-        Bottom<T>* getPtr() const override {
-            return as<Bottom<T>*>(NodeHandle<T>::getPtr());
+        friend class Forest<T>;
+        const Bottom<T>* getPtr() const override {
+            return dynamic_cast<const Bottom<T>*>(NodeHandle<T>::getPtr());
         }
         DataNodeHandle(Bottom<T>* inner) : NodeHandle<T>(inner) {}
     public:

@@ -7,6 +7,7 @@
 #include <string>
 #include "Forest/TransLonely.h"
 #include "Forest/TransNormalTop.h"
+#include "FindingRichestRegion.h"
 
 int main() {
     ArenaStack::TransIncreasableAlone<int> var;
@@ -24,7 +25,8 @@ int main() {
     Forest::TransLonely<int> town1(1);
     Forest::TransLonely<int> town2(2);
     auto town3 = town1->getHead()->merge(town2->getHead(), forest.pushRaw<Forest::TransNormalTop<int>>());
-
+    FindingRichestRegion solver;
+    solver.createIndividual(50000);
 
     return 0;
 }

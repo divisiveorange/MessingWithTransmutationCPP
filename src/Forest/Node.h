@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 namespace Forest {
     template <class T>
     class Bottom;
@@ -11,8 +12,9 @@ namespace Forest {
     template <class T>
     class Node {
     public:
-        virtual Top<T>* getHead() = 0;
-        virtual const T& getSum() = 0;
+        virtual Top<T>* const getHead() const = 0;
+        virtual const T& getSum() const = 0;
         virtual ~Node() {}
+        virtual std::optional<Top<T>*> isTop() const = 0;
     };
 }

@@ -1,17 +1,20 @@
 #pragma once
 #include "Node.h"
-namespace Forest::NodeHandles {
+#include "Top.h"
+namespace Forest {
+    template <class T>
+    class Forest;
     template <class T>
     class NodeHandle {
-        friend class Forest;
+        friend class Forest<T>;
         const Node<T>* inner;
     protected:
-        virtual Node<T>* getPtr() const {
+        virtual const Node<T>* getPtr() const {
             return inner;
         }
-        NodeHandle(Node<T>* inner) : inner(inner) {}
+        NodeHandle(const Node<T>* inner) : inner(inner) {}
     public:
-        virtual operator==(const NodeHandle& other) const {
+        virtual bool operator==(const NodeHandle& other) const {
             return this->getPtr() == other.getPtr();
         }
         virtual NodeHandle getTop() const {
@@ -19,6 +22,9 @@ namespace Forest::NodeHandles {
         }
         virtual const T& getSum() const {
             return getPtr()->getSum();
+        }
+        virtual bool isTop() const {
+            return this->getPtr()->isTop().has_value();
         }
     };
 }

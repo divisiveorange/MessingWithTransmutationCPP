@@ -7,7 +7,7 @@ namespace Forest {
         T data;
     public:
         Bottom(const T& data) : data(data) {}
-        const T& getSum() override {
+        const T& getSum() const override {
             return data;
         }
         virtual void update(const T& newData) {

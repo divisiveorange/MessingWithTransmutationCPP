@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "Top.h"
 namespace Forest {
     template <class T>
     class NonBottom;
@@ -9,8 +10,11 @@ namespace Forest {
         NonBottom<T>* up;
     public:
         NonTop(NonBottom<T>* up) : up(up) {}
-        Top<T>* getHead() override {
+        Top<T>* const getHead() const override {
             return up->getHead();
+        }
+        std::optional<Top<T>*> isTop() const override {
+            return {};
         }
     };
 }
