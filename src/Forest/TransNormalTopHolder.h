@@ -12,6 +12,9 @@ namespace Forest {
             offset = ptr->template getOffsetToBase<NonBottom<T>>();
             auto test = getPtr();
         }
+        ~TransNormalTopHolder() {
+            getPtr()->~NonBottom();
+        }
         NonBottom<T>* getPtr() {
             return reinterpret_cast<NonBottom<T>*>(storage + offset);
         }

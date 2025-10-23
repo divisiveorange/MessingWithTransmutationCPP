@@ -12,6 +12,9 @@ namespace Forest {
             offset = ptr->template getOffsetToBase<Bottom<T>>();
             auto test = getPtr();
         }
+        ~TransLonelyHolder() {
+            getPtr()->~Bottom();
+        }
         Bottom<T>* getPtr() {
             return reinterpret_cast<Bottom<T>*>(storage + offset);
         }
