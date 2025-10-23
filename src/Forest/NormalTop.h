@@ -3,7 +3,7 @@
 #include "Top.h"
 namespace Forest {
     template <class T>
-    class NormalTop : public Top<T>, public NonBottom<T> {
+    class NormalTop : public NonBottom<T>, public Top<T> {
     public:
         NormalTop(NonTop<T>* left, NonTop<T>* right) : NonBottom<T>(left, right) {}
     };

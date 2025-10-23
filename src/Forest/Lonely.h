@@ -3,7 +3,7 @@
 #include "Top.h"
 namespace Forest {
     template <class T>
-    class Lonely : public Top<T>, public Bottom<T> {
+    class Lonely : public Bottom<T>, public Top<T> {
     public:
         Lonely(const T& data) : Bottom<T>(data) {}
     };

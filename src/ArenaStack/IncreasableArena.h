@@ -18,6 +18,7 @@ namespace ArenaStack {
             if (currentPlace < this->size) {
                 auto returnable = this->data + currentPlace;
                 currentPlace++;
+                assert(*reinterpret_cast<char*>(returnable) or true);
                 return returnable;
             } else if (currentPlace > this->size) {
                 // Shouldn't be possible
@@ -45,7 +46,8 @@ namespace ArenaStack {
         }
         ~IncreasableArena() override {
             for (auto i = int64_t{currentPlace} - 1; i >= 0; i--) {
-                this->data[i].~T();
+                auto& curr = this->data[i];
+                curr.~T();
             }
         }
     };

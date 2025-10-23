@@ -13,6 +13,8 @@ void checkValid(From* local) {
     static_assert(std::is_base_of_v<Base, To>);
     static_assert((sizeof(From) >= sizeof(To)));
     static_assert((alignof(From) >= alignof(To)));
-    To* temp = static_cast<To*>(alloca(sizeof(To)));
-    // assert(local->template getOffsetToBase<Base>() == temp->template getOffsetToBase<Base>());
+    // To* temp = static_cast<To*>(alloca(sizeof(To)));
+    assert(local->template getOffsetToBase<Base>() == static_cast<To*>(alloca(sizeof(To)))->template getOffsetToBase<Base>());
+    // If this assertion fails, you can reorient your multiple inheritances. If you can't then transmutation between
+    // these types isn't possible
 }

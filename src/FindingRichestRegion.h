@@ -3,9 +3,17 @@
 #include <vector>
 #include <ranges>
 #include <cstdlib>
+#include <ostream>
 
 #include "Forest/DataNodeHandle.h"
 class RegionData {
+    friend std::ostream & operator<<(std::ostream &os, const RegionData &obj) {
+        return os
+               << "population: " << obj.getPopulation()
+               << " gdp: " << obj.getGDP()
+               << " gdp per capita: " << obj.getGDPPerCapita();
+    }
+
 public:
     RegionData(const RegionData &other)
         : population(other.population),
@@ -41,6 +49,7 @@ public:
     [[nodiscard]] double getGDP() const {return gdp;}
     [[nodiscard]] double getGDPPerCapita() const {return gdp / population;};
     RegionData(const uint64_t population, const double gdp) : population(population), gdp(gdp) {}
+
     auto operator+(const RegionData& other) const {
         return RegionData(getPopulation() + other.getPopulation(),getGDP() + other.getGDP());
     }
@@ -62,8 +71,22 @@ public:
     }
     Handle constructConnection(const Handle& handle1, const Handle& handle2) {
         auto handle = dataTree.merge(handle1, handle2);
+        if (higherGroupings.size() == 10017566-individuals.size()) {
+
+        }
         higherGroupings.push_back(handle);
         return handle;
+    }
+    void lotsOfRandomOperations() {
+        for (long long i = 0; i < 10000000; ++i) {
+            randomCreateIndividual();
+        }
+        for (long long i = 0; i < 100000; ++i) {
+            if (i == 29795) {
+
+            }
+            randomConstructConnection();
+        }
     }
     DataHandle randomCreateIndividual() {
         return createIndividual(rand() % 200000);
@@ -71,12 +94,19 @@ public:
     Handle randomConstructConnection() {
         std::array indexes = {rand() % individuals.size() + higherGroupings.size(), rand() % individuals.size() + higherGroupings.size()};
         std::vector<Handle*> handles;
+
         for (auto index : indexes) {
             if (index >= individuals.size()) {
                 handles.push_back(&higherGroupings.at(index - individuals.size()));
             } else {
                 handles.push_back(&individuals.at(index));
             }
+        }
+        if (indexes[0] == 277393 or indexes[1] == 277393) {
+
+        }
+        if (indexes[0] == 2626394 and indexes[1] == 6847594) {
+
         }
         return constructConnection(*handles.at(0), *handles.at(1));
     }
