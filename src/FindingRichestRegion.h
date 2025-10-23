@@ -71,9 +71,6 @@ public:
     }
     Handle constructConnection(const Handle& handle1, const Handle& handle2) {
         auto handle = dataTree.merge(handle1, handle2);
-        if (higherGroupings.size() == 10017566-individuals.size()) {
-
-        }
         higherGroupings.push_back(handle);
         return handle;
     }
@@ -81,10 +78,7 @@ public:
         for (long long i = 0; i < 10000000; ++i) {
             randomCreateIndividual();
         }
-        for (long long i = 0; i < 100000; ++i) {
-            if (i == 29795) {
-
-            }
+        for (long long i = 0; i < 1000000; ++i) {
             randomConstructConnection();
         }
     }
@@ -101,12 +95,6 @@ public:
             } else {
                 handles.push_back(&individuals.at(index));
             }
-        }
-        if (indexes[0] == 277393 or indexes[1] == 277393) {
-
-        }
-        if (indexes[0] == 2626394 and indexes[1] == 6847594) {
-
         }
         return constructConnection(*handles.at(0), *handles.at(1));
     }

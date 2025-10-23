@@ -6,7 +6,7 @@ int main() {
     {
         ArenaStack::MultiTypeArena<long long, double, std::string> arena;
         for (long long i = 0; i < 10000000; i++) {
-            arena.template push<long long>(i);
+            arena.push<long long>(i);
         }
     }
     auto lonely1 = (new Forest::TransLonelyHolder<int>(1))->getPtr();
@@ -17,10 +17,11 @@ int main() {
     Forest::NonBottom<int>* firstTop = lonely1->getHead()->merge(lonely2->getHead(), ptr);
     Forest::Node<int>* nodeStarFirstTop = firstTop;
     auto secondTop = firstTop->getHead()->merge(lonely3->getHead(), ptr2);
-
     FindingRichestRegion solver;
     srand(0);
     solver.lotsOfRandomOperations();
     std::cout << solver.getRichest().getSum() << std::endl;
+    std::cout << solver.getBiggestEconomy().getSum() << std::endl;
+    std::cout << solver.getMostPopulous().getSum() << std::endl;
     return 0;
 }
