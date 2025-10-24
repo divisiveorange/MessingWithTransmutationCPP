@@ -20,9 +20,6 @@ namespace Forest {
         TransNormalTop(NonTop<T>* left, NonTop<T>* right) : NormalTop<T>(left, right) {
         }
     public:
-        ~TransNormalTop() {
-
-        }
         NonBottom<T>& operator*() {
             return *this;
         }

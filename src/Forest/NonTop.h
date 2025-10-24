@@ -21,7 +21,7 @@ namespace Forest {
         }
     public:
         NonTop(NonBottom<T>* up) : up(up) {}
-        Top<T>* const getHead(void** up) const override {
+        Top<T>* const getHead(void** up) const {
             assert(this->getUp() != nullptr);
             return this->getUp()->getHead();
         }

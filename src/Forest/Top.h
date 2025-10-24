@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include "NormalTop.h"
+#include "TransNormalTopHolder.h"
 
 namespace Forest {
     template <class T>
@@ -13,9 +14,6 @@ namespace Forest {
         }
     public:
         Top<T>* const getHead() const override {
-            return const_cast<Top<T>* const>(this);
-        }
-        Top<T>* const getHead(void** up) const override {
             return const_cast<Top<T>* const>(this);
         }
         NonBottom<T>* merge(Top<T>* const otherTop, TransNormalTopHolder<T>* constructionLocation) {

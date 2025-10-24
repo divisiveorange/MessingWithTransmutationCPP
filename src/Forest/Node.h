@@ -14,12 +14,7 @@ namespace Forest {
     template <class T>
     class Node {
     public:
-        virtual Top<T>* const getHead() const {
-            assert(false);
-        };
-        virtual Top<T>* const getHead(void** up) const {
-            assert(false);
-        };
+        virtual Top<T>* const getHead() const = 0;
         virtual NonTop<T>* toNonTop(NormalTop<T>* newTop) = 0;
         virtual const T& getSum() const = 0;
         virtual ~Node() {}

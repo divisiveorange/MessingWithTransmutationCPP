@@ -23,6 +23,7 @@ namespace ArenaStack {
             } else if (currentPlace > this->size) {
                 // Shouldn't be possible
                 assert(false);
+                return nullptr;
             } else {
                 std::unique_ptr<FullArena<T>> next(&(new TransFullAlone<T>(this->data))->getFullArena());
                 this->data = nullptr;
