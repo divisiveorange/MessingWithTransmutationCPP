@@ -8,7 +8,7 @@ namespace ArenaStack {
         FullArena(const FullArena& other) = default;
         FullArena(FullArena&& other) = default;
         ~FullArena() override {
-            for (auto i = this->size - 1; i >= 0; i--) {
+            for (auto i = this->size - 1; i >= 0; --i) {
                 this->data[i].~T();
             }
         }

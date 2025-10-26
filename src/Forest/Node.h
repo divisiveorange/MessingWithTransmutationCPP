@@ -14,6 +14,7 @@ namespace Forest {
     template <class T>
     class Node {
     public:
+        // Read the readme for information about the class hierarchy
         virtual Top<T>* const getHead() const = 0;
         virtual NonTop<T>* toNonTop(NormalTop<T>* newTop) = 0;
         virtual const T& getSum() const = 0;

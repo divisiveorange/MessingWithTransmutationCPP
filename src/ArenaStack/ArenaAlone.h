@@ -8,7 +8,7 @@ namespace ArenaStack {
         ArenaAlone(const ArenaAlone& other) = default;
         ArenaAlone(ArenaAlone&& other) = default;
         void transmuteRemoveNext() override {
-
+            // I think it's better to allow calling this but have it do nothing
         }
     protected:
         ArenaAlone(T* data) : Arena<T>(data) {}

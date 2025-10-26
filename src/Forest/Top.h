@@ -20,18 +20,8 @@ namespace Forest {
             NonTop<T>* nonTopOther = otherTop->derivedThis()->toNonTop(nullptr);
             NonTop<T>* nonTopThis = this->derivedThis()->toNonTop(nullptr);
             NormalTop<T>* newTop = dynamic_cast<NormalTop<T>*>((new(constructionLocation)TransNormalTopHolder<T>(nonTopThis, nonTopOther))->getPtr());
-            nonTopOther = nonTopOther->derivedThis()->toNonTop(newTop);
-            nonTopThis = nonTopThis->derivedThis()->toNonTop(newTop);
-            // long long offset = reinterpret_cast<char*>(nonTopThis) - reinterpret_cast<char volatile*>(&nonTopThis->up);
-            // long long offsetOther = reinterpret_cast<char*>(nonTopOther) - reinterpret_cast<char volatile*>(&nonTopOther->up);
-            // *reinterpret_cast<TransNormalTop<T>**>(reinterpret_cast<char*>(otherTop) + offsetOther) = newTop;
-            // *reinterpret_cast<TransNormalTop<T>**>(reinterpret_cast<char*>(this) + offset) = newTop;
-            // nonTopOther->up = newTop;
-            // reinterpret_cast<NonTop<T>*>(this)->up = newTop;
-            // reinterpret_cast<NonTop<T>*>(otherTop)->up = newTop;
-            // nonTopThis->up = newTop;
-            // assert(newTop == nonTopThis->getHead());
-            // auto var = newTop->getHead();
+            nonTopOther->derivedThis()->toNonTop(newTop);
+            nonTopThis->derivedThis()->toNonTop(newTop);
             return newTop;
         }
         std::optional<Top<T>*> isTop() const override {

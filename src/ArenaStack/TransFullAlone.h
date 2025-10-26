@@ -26,6 +26,7 @@ namespace ArenaStack {
         }
         template<class To>
         long long getOffsetToBase() {
+            // This function is needed for checking the validity of a transmutation
             return reinterpret_cast<long long>(dynamic_cast<To*>(this)) - reinterpret_cast<long long>(this);
         }
     };

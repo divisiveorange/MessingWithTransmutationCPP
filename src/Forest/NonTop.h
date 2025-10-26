@@ -21,15 +21,10 @@ namespace Forest {
         }
     public:
         NonTop(NonBottom<T>* up) : up(up) {}
-        Top<T>* const getHead(void** up) const {
-            assert(this->getUp() != nullptr);
-            return this->getUp()->getHead();
-        }
         Top<T>* const getHead() const override {
             auto up = this->getUp();
             assert(up != nullptr);
             return up->getHead();
-            // return static_cast<Node<T>*>(this->up)->getHead();
         }
         std::optional<Top<T>*> isTop() const override {
             return {};

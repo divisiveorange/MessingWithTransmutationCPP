@@ -10,6 +10,8 @@ namespace Forest {
     protected:
         friend class Forest<T>;
         const Bottom<T>* getPtr() const override {
+            // Ideally, this class would instead directly store a Bottom* but that would require an abstract Node Handle class
+            // and that seemed unnecessary for the task at hand
             return dynamic_cast<const Bottom<T>*>(NodeHandle<T>::getPtr());
         }
         DataNodeHandle(Bottom<T>* inner) : NodeHandle<T>(inner) {}

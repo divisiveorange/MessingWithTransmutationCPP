@@ -21,6 +21,7 @@ namespace Forest {
             return reinterpret_cast<long long>(static_cast<Base*>(this)) - reinterpret_cast<long long>(this);
         }
         NonTop<T>* toNonTop(NormalTop<T>* newTop) override {
+            // This doesn't transmute but it makes it more consistent with the transmuting sibling method
             return new(this) NormalBottom(this->getData(), newTop);
         }
         NormalBottom<T>* derivedThis() override {

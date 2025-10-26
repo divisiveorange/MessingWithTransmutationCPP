@@ -15,6 +15,7 @@ namespace ArenaStack {
         IncreasableArena(IncreasableArena&& other) = default;
         IncreasableArena() = default;
         T* pushRaw() {
+            // Provides memory for the caller to call a constructor
             if (currentPlace < this->size) {
                 auto returnable = this->data + currentPlace;
                 currentPlace++;
@@ -35,6 +36,7 @@ namespace ArenaStack {
         }
         template<typename... Args>
         T* push(Args&&... args) {
+            // Allocates memory and calls a constructor
             return new(pushRaw()) T(std::forward<Args>(args)...);
         }
         virtual void pop() = 0;

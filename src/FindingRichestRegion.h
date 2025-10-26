@@ -6,6 +6,7 @@
 #include <ostream>
 
 #include "Forest/DataNodeHandle.h"
+// This file is just to provide a user of the forest.
 class RegionData {
     friend std::ostream & operator<<(std::ostream &os, const RegionData &obj) {
         return os

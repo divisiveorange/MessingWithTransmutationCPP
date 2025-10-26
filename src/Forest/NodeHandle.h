@@ -6,6 +6,7 @@ namespace Forest {
     class Forest;
     template <class T>
     class NodeHandle {
+        // This class provides a little wrapper around nodes for callers to identify nodes without providing access to the internal type
         friend class Forest<T>;
         const Node<T>* inner;
     protected:

@@ -3,6 +3,7 @@
 namespace ArenaStack {
     template<class... Ts>
     class MultiTypeArena {
+        // Allowing storing mulitple types in multiple arenas but the same variable
     public:
         template<class T>
         void pop() {
