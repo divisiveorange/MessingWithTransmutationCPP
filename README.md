@@ -1,4 +1,4 @@
-#Prelude:
+# Prelude:
 
 2 principles I've liked about Object-Oriented Programming is that an object's state should be hidden via delegating the management of its state to the object itself, and that one should put as much of the state of an object into it's class.
 
@@ -24,7 +24,7 @@ The 2 advantages of inheritence over interfaces is code sharing and a more rigid
 
 But, in this set of trees, we might want to combine trees into a larger tree (union find) and that would mean that a Top node would have to be replaced by a NonTop, and so we of course need transmutation for this to be a clean operation. 
 
-#Defining what I want and discussing alternatives: 
+# Defining what I want and discussing alternatives: 
 
 My ideal result would be to be able to hold any base class pointer (or an interface reference in Java but I'll stick to C++ terms from this point onwards) be able to call a method that could modify the underlying type to another type that derives from the base class, that all pointers to this object via base class pointers remain valid, that this transmutation operation is always valid and finally that this doesn't make an additional memory allocation.
 
@@ -62,7 +62,7 @@ This system of course allows easy transmutation through the wrapper class but th
 
 But something about storing a pointer to the storage of an item doesn't sit right with me because, in the case of a tagged union, it shouldn't actually need to store that pointer. I can't find out exactly, but it seems to be the case that at least in clang and gcc, the first item of a std::variant is the currently stored item. Therefore, so long as the this pointer points to the true start of the object (so not in a weird multiple inheritance situation where the function is not being run from the actual class), one can just reinterpret\_cast the this pointer to be one of the exact std::variant type. This was where I moved onto alternative systems because that seems quite cursed, even if via using friend classes, it could be safe.
 
-#Onto my journey to fufill my requirements:
+# Onto my journey to fufill my requirements:
 
 So, given one can just run `new(this) Obect()` the main issue is making sure there's enough space allocated for the type to transmute into. The obvious idea is just adding padding to the back of the class so that there's enough space for other types. How much padding can be calculated manually for all the types, but that is far form ideal. What would be better would be for the program to calculate this (probably with something with templates where the programmer enters the classes they want the object to be able to transmute into) but there's a problem, to work out how much padding is required, one would have to know how much the current object takes up, which would include the padding. This is also a problem if you want to ensure there is enough space in Class A to transmute to Class B, which needs to have enough space to transmute to Class A, a problem. 
 
@@ -123,7 +123,7 @@ I kinda glossed over checking that the base class pointer points to the same mem
 In theory, I could imagine a multiple inheritence system that works more like Java's interfaces to work with this. Where instead of directly accessing a vtable, code that uses an interface looks at the objects type and works out the method to call that way. I could imagine a way to get that to work with data members in a similar way to default methods, but that would be doing a lot at runtime which Java can get away with due to it's JIT compiler but I'm not sure C++ could. 
 
 
-#Conclusion:
+# Conclusion:
 My general reccomendation is to avoid this kind of vtable based transmutation. But if you really want to use it, single inheritence does work. And the best system to achieve that is to make each class a friend class holder for it that takes in template parameters for the classes to transmute into so there is space and alignment. While multiple inheritence can work, it's too dependent on the specific makeup of the types that I strongly reccomend against it. 
 
 What I do reccomend insteaed is forgoing inheritence based dynamic polymorphism (but you can still use CRTP based code sharing inheritence) entirely in favour of storing types in an std::variant and using std::visit with an auto type, and passing through the pointer to that variant when calling functions that can transmute. This is actually valid (well maybe transmute it from the variant instead of a method from an object getting transmuted). Although I don't see an easy way to allow multiple inheritence like things. 
