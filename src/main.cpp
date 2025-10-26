@@ -19,6 +19,7 @@ int main() {
     auto secondTop = firstTop->getHead()->merge(lonely3->getHead(), ptr2);
     FindingRichestRegion solver;
     srand(0);
+    // The 1997 mersan twister thing is unnecessary
     solver.lotsOfRandomOperations();
     std::cout << solver.getRichest().getSum() << std::endl;
     std::cout << solver.getBiggestEconomy().getSum() << std::endl;
