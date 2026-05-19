@@ -124,6 +124,7 @@ I kinda glossed over checking that the base class pointer points to the same mem
 
 In theory, I could imagine a multiple inheritance system that works more like Java's interfaces to work with this. Where instead of directly accessing a vtable, code that uses an interface looks at the objects type and works out the method to call that way. I could imagine a way to get that to work with data members in a similar way to default methods, but that would be doing a lot at runtime which Java can get away with due to it's JIT compiler but I'm not sure C++ could. 
 
+There is one other problem: the compiler is allowed to treat the vtable as a constant, which is does with optimisations turned on and so sometimes, function calls on the transmutated object use the old vtable. std::launder does not work for this situation because it only launders the pointer it returns but we want this to work for any number of pointers to the object. The solution is both happily and sadly to just disable these optimisations with -fno-strict-aliasing, -fno-lifetime-dse and -fno-devirtualize. 
 
 # Conclusion:
 My general recommendation is to avoid this kind of vtable based transmutation. But if you really want to use it, single inheritance does work. And the best system to achieve that is to make each class a friend class holder for it that takes in template parameters for the classes to transmute into so there is space and alignment. While multiple inheritance can work, it's too dependent on the specific makeup of the types that I strongly recommend against it. 
